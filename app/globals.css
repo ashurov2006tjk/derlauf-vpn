@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body { @apply bg-ink text-silver font-sans antialiased; }
+:focus-visible { outline: 2px solid #e3b341; outline-offset: 3px; border-radius: 6px; }
+::selection { background: #d9202a; color: #fff; }
+
+/* Единственный анимированный момент: появление героя при загрузке */
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes sheen { 0%,60% { background-position: -150% 0; } 100% { background-position: 250% 0; } }
+.hero-in { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.hero-in:nth-child(2) { animation-delay: .1s; }
+.hero-in:nth-child(3) { animation-delay: .2s; }
+.hero-in:nth-child(4) { animation-delay: .3s; }
+.sheen {
+  background: linear-gradient(110deg, #fff 30%, #c8ccd2 45%, #e3b341 50%, #c8ccd2 55%, #fff 70%);
+  background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: sheen 6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-in, .sheen { animation: none; }
+  .sheen { color: #fff; background: none; }
+}
